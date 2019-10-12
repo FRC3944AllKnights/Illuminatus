@@ -1,22 +1,24 @@
 #ifndef DRIVE_H
 #define DRIVE_H
 
-#include <Drive/MecanumDrive.h>
+#include <frc/drive/DifferentialDrive.h>
+#include <frc/SpeedControllerGroup.h>
 #include <ctre/Phoenix.h>
 
 class Drive{
     public:
         Drive();
         void init();
-        void mechanum(double x, double y, double z, double throttle);
+        void Arcade(double x, double y);
 
     private:
         WPI_TalonSRX m_frontLeft{1};
         WPI_TalonSRX m_rearLeft{2};
         WPI_TalonSRX m_frontRight{3};
         WPI_TalonSRX m_rearRight{4};
-        frc::MecanumDrive m_robotDrive{m_frontLeft, m_rearLeft, m_frontRight,
-                                 m_rearRight};
+        frc::SpeedControllerGroup m_Left{m_frontLeft, m_rearLeft};
+        frc::SpeedControllerGroup m_Right{m_frontRight, m_rearRight};
+        frc::DifferentialDrive m_robotDrive{m_Left, m_Right};
 };
 
 #endif
